@@ -5,6 +5,16 @@ the decoder behind `djxl`. It uses Dart FFI and a native-assets build hook, so a
 need no CMake, compiler, or system libjxl: the hook downloads a prebuilt,
 SHA-256-verified library for the target platform.
 
+## Usage
+
+```sh
+dart pub add jxl_native     # or: flutter pub add jxl_native
+```
+
+Requires Dart 3.10+ (Flutter 3.38+) for native-assets hooks. The first build
+downloads the library for its target from this repository's GitHub releases;
+later builds reuse the verified copy.
+
 ```dart
 import 'dart:io';
 import 'package:jxl_native/jxl_native.dart';
@@ -69,6 +79,12 @@ Visual Studio developer shell.
 
 To release: run the **Native release** workflow (or push a `native-v*` tag),
 then copy the published `manifest.json` into `native/manifest.json`.
+
+To publish to pub.dev, commit the release manifest, bump `version` and
+`CHANGELOG.md`, and push a matching `vX.Y.Z` tag; the **Publish to pub.dev**
+workflow uploads it. The first version must be published by hand
+(`dart pub publish`), after which automated publishing for this repository and
+the `v{{version}}` tag pattern must be enabled in the package's pub.dev admin.
 
 ## Licensing
 

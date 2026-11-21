@@ -1,0 +1,15 @@
+name: Publish to pub.dev
+
+# Push a vX.Y.Z tag matching pubspec.yaml's version. Requires automated
+# publishing for this repository to be enabled in the pub.dev package admin.
+on:
+  push:
+    tags: ["v[0-9]+.[0-9]+.[0-9]+*"]
+
+jobs:
+  publish:
+    permissions:
+      id-token: write
+    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+    with:
+      use-flutter: false

@@ -3,6 +3,12 @@ description: JPEG XL decoding for Dart through libjxl, the djxl decoder, using F
 version: 0.1.0
 repository: https://github.com/Alchemist-Aloha/jxl_native
 issue_tracker: https://github.com/Alchemist-Aloha/jxl_native/issues
+topics:
+  - jpeg-xl
+  - image
+  - codec
+  - ffi
+  - native-assets
 
 environment:
   sdk: ^3.10.0
@@ -14,4 +20,5 @@ dependencies:
   hooks: ^2.2.0
 
 dev_dependencies:
+  lints: ^6.1.0
   test: ^1.33.0

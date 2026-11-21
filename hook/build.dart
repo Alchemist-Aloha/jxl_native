@@ -136,7 +136,7 @@ Future<void> _download(Uri url, File destination) async {
         uri: url,
       );
     }
-    final temporary = File('${destination.path}.${pid}.tmp');
+    final temporary = File('${destination.path}.$pid.tmp');
     final sink = temporary.openWrite();
     try {
       await response.timeout(const Duration(minutes: 2)).pipe(sink);

@@ -33,13 +33,17 @@ int get jxlNativeDecoderVersion => _decoderVersion();
 
 /// A decoded JPEG XL frame as straight (non-premultiplied) RGBA8.
 final class JxlImageData {
+  /// Wraps already-decoded pixels; [rgba] must hold `width * height * 4` bytes.
   const JxlImageData({
     required this.width,
     required this.height,
     required this.rgba,
   });
 
+  /// Width in pixels, after orientation is applied.
   final int width;
+
+  /// Height in pixels, after orientation is applied.
   final int height;
 
   /// `width * height * 4` bytes, row-major, top-left origin.
@@ -48,8 +52,10 @@ final class JxlImageData {
 
 /// Thrown when libjxl cannot decode the input.
 final class JxlDecodeException implements Exception {
+  /// Creates an exception describing why decoding failed.
   const JxlDecodeException(this.message);
 
+  /// Human-readable reason, such as `input is truncated`.
   final String message;
 
   @override
