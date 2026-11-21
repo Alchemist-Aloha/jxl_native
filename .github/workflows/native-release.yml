@@ -1,0 +1,121 @@
+name: Native release
+
+on:
+  push:
+    tags: ["native-v*"]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Native release version, without native-v
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  build-unix:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { target: macos-arm64, runner: macos-26 }
+          - { target: macos-x64, runner: macos-26 }
+          - { target: ios-device-arm64, runner: macos-26 }
+          - { target: ios-simulator-arm64, runner: macos-26 }
+          - { target: ios-simulator-x64, runner: macos-26 }
+          - { target: android-arm64, runner: ubuntu-26.04 }
+          - { target: android-arm, runner: ubuntu-26.04 }
+          - { target: android-x64, runner: ubuntu-26.04 }
+          - { target: linux-x64, runner: ubuntu-26.04 }
+          - { target: linux-arm64, runner: ubuntu-26.04-arm }
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install macOS build tools
+        if: runner.os == 'macOS'
+        run: brew install ninja
+
+      - name: Install Linux build tools
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build
+
+      - uses: actions/cache@v6
+        with:
+          path: .native-cache/sources
+          key: libjxl-${{ hashFiles('native/versions.json') }}
+
+      - name: Build
+        run: tool/native/build_unix.sh "${{ matrix.target }}"
+
+      - name: Reject unexpected dynamic dependencies
+        run: |
+          library=$(ls dist/${{ matrix.target }}/libjxl_native.* | grep -v '\.gz$')
+          case "$library" in
+            *.dylib)
+              ! otool -L "$library" | grep -E '/opt/homebrew|/usr/local|\.native-cache'
+              ;;
+            *.so)
+              readelf=$(command -v readelf || find "${ANDROID_NDK_HOME:-$ANDROID_NDK_LATEST_HOME}" -name llvm-readelf -print -quit)
+              "$readelf" -d "$library"
+              ! "$readelf" -d "$library" | grep -E 'NEEDED.*(libstdc\+\+|libc\+\+_shared|libgcc_s)'
+              ;;
+          esac
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: native-${{ matrix.target }}
+          path: dist/${{ matrix.target }}/*.gz
+          if-no-files-found: error
+
+  build-windows:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { target: windows-x64, runner: windows-2025, msvc: amd64 }
+          - { target: windows-arm64, runner: windows-11-arm, msvc: arm64 }
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: ${{ matrix.msvc }}
+      - uses: actions/cache@v6
+        with:
+          path: .native-cache/sources
+          key: libjxl-${{ hashFiles('native/versions.json') }}
+      - name: Build
+        shell: pwsh
+        run: tool/native/build_windows.ps1 ${{ matrix.target }}
+      - name: List dependencies
+        shell: pwsh
+        run: dumpbin /DEPENDENTS dist/${{ matrix.target }}/jxl_native.dll
+      - uses: actions/upload-artifact@v7
+        with:
+          name: native-${{ matrix.target }}
+          path: dist/${{ matrix.target }}/*.gz
+          if-no-files-found: error
+
+  release:
+    needs: [build-unix, build-windows]
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
+        with:
+          path: dist
+      - name: Build release manifest
+        id: version
+        shell: bash
+        run: |
+          version='${{ inputs.version }}'
+          [[ -n "$version" ]] || version="${GITHUB_REF_NAME#native-v}"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          python3 tool/generate_manifest.py "$version" "$GITHUB_REPOSITORY" dist
+      - uses: softprops/action-gh-release@v3
+        with:
+          tag_name: native-v${{ steps.version.outputs.version }}
+          files: release/*

@@ -1,0 +1,8 @@
+{
+  "libjxl": {
+    "version": "0.13.0",
+    "repository": "https://github.com/libjxl/libjxl.git",
+    "commit": "5a7da83447212fe4900fc29ce97430b881caa67e",
+    "submodules": ["third_party/brotli", "third_party/highway", "third_party/skcms"]
+  }
+}

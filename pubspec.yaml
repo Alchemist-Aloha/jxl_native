@@ -1,0 +1,17 @@
+name: jxl_native
+description: JPEG XL decoding for Dart through libjxl, the djxl decoder, using FFI and native-assets hooks with prebuilt libraries.
+version: 0.1.0
+repository: https://github.com/Alchemist-Aloha/jxl_native
+issue_tracker: https://github.com/Alchemist-Aloha/jxl_native/issues
+
+environment:
+  sdk: ^3.10.0
+
+dependencies:
+  code_assets: ^2.2.0
+  crypto: ^3.0.8
+  ffi: ^2.2.0
+  hooks: ^2.2.0
+
+dev_dependencies:
+  test: ^1.33.0

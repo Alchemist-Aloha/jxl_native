@@ -1,0 +1,7 @@
+.dart_tool/
+.native-cache/
+dist/
+release/
+build/
+pubspec.lock
+native/artifacts/
