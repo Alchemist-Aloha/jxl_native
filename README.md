@@ -22,6 +22,23 @@ pool and blocks the calling isolate, so use `Isolate.run` for large images.
 `maxPixels` (default 2^28) rejects oversized images before pixel memory is
 allocated. Failures throw `JxlDecodeException`.
 
+## Performance
+
+Decoding a 3000×2000 (6 MP) lossy JPEG XL photo (`cjxl -d 1`, 3.2 MB, with
+added noise as a worst case) to RGBA8 on an Intel Core i5-13600K, Linux x64:
+
+| Decoder | Time |
+| --- | --- |
+| `jxl_native` 0.1.0 (libjxl 0.13.0, libjxl thread pool) | **28 ms** |
+| `djxl` 0.13.0, single thread (includes writing a PPM file) | ~190 ms |
+| [`koni_jxl`](https://pub.dev/packages/koni_jxl) 0.1.4 (pure Dart) | 985 ms |
+
+Dart timings are AOT-compiled (`dart build cli`), averaged over three runs
+after a warm-up decode; `djxl` is wall-clock time for the CLI. The thread pool
+size comes from libjxl's suggestion for the image size, so small images use
+fewer threads and gain less. Results vary with CPU, image content, and
+encoder settings.
+
 ## Platforms
 
 Android (arm64, arm, x64), iOS (device, arm64/x64 simulator), macOS (arm64,
