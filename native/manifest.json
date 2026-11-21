@@ -1,4 +1,77 @@
 {
-  "nativeVersion": "unreleased",
-  "artifacts": {}
+  "nativeVersion": "0.1.0",
+  "artifacts": {
+    "android-arm": {
+      "url": "https://github.com/Alchemist-Aloha/jxl_native/releases/download/native-v0.1.0/android-arm-libjxl_native.so.gz",
+      "archiveSha256": "5056ad36997c4578b5c3560afe7ffab3b915e7abb7b24568dabc607d60f4fe31",
+      "librarySha256": "c8ecd9043e02df50733746755b0c0b601d5b8a482559b1adcaa196fbb3dba8a9",
+      "fileName": "libjxl_native.so"
+    },
+    "android-arm64": {
+      "url": "https://github.com/Alchemist-Aloha/jxl_native/releases/download/native-v0.1.0/android-arm64-libjxl_native.so.gz",
+      "archiveSha256": "301830c70a473032eb87c0ec2128190b0c712eccead522f5429979ad343770ee",
+      "librarySha256": "9187b4c4f366bb3cab9cbe57b6dd84cda43f91aeaaafa789df5ea74ff1b38c27",
+      "fileName": "libjxl_native.so"
+    },
+    "android-x64": {
+      "url": "https://github.com/Alchemist-Aloha/jxl_native/releases/download/native-v0.1.0/android-x64-libjxl_native.so.gz",
+      "archiveSha256": "97e6b660732718c1f493f9218434188ca50c66fc5abd121b4375e8f577af8612",
+      "librarySha256": "b7d6f4ab2d8071503b3131ad0bde9cdbbf03133ac5ead3436a69175b2806abca",
+      "fileName": "libjxl_native.so"
+    },
+    "ios-device-arm64": {
+      "url": "https://github.com/Alchemist-Aloha/jxl_native/releases/download/native-v0.1.0/ios-device-arm64-libjxl_native.dylib.gz",
+      "archiveSha256": "5579a0b4d53c6d6278f745acc2e548d6d03749f19f331810e60884e6fcc28ce6",
+      "librarySha256": "8ff7c432a4764a0a4bfc0fff83d68211800f4d2c66d8a1c355abfa037e03f252",
+      "fileName": "libjxl_native.dylib"
+    },
+    "ios-simulator-arm64": {
+      "url": "https://github.com/Alchemist-Aloha/jxl_native/releases/download/native-v0.1.0/ios-simulator-arm64-libjxl_native.dylib.gz",
+      "archiveSha256": "fb6adba45d927a286405b46e530a83a4d93e9964e63f5e984882d9f26b86cf76",
+      "librarySha256": "5f35677f2678f8dc94a424718bffed96e231bd0f20193c13fc28fb8b406a9e43",
+      "fileName": "libjxl_native.dylib"
+    },
+    "ios-simulator-x64": {
+      "url": "https://github.com/Alchemist-Aloha/jxl_native/releases/download/native-v0.1.0/ios-simulator-x64-libjxl_native.dylib.gz",
+      "archiveSha256": "338c6086b1ac452d929845e664648e9caf4a2db0aeab48d0387227771c87075e",
+      "librarySha256": "9fc43c2c20400c0a79886e4a791e0b26ad37de9b30e19bda55e6079e2136753f",
+      "fileName": "libjxl_native.dylib"
+    },
+    "linux-arm64": {
+      "url": "https://github.com/Alchemist-Aloha/jxl_native/releases/download/native-v0.1.0/linux-arm64-libjxl_native.so.gz",
+      "archiveSha256": "5d300a5a391fc834a4b7f73c179632c549f8a897aa2460a7829fab881bd522c2",
+      "librarySha256": "454abcb50f9a0a327e3bd8adf35f9a3cf57f9ade0c3f45a3321a26f12b428e50",
+      "fileName": "libjxl_native.so"
+    },
+    "linux-x64": {
+      "url": "https://github.com/Alchemist-Aloha/jxl_native/releases/download/native-v0.1.0/linux-x64-libjxl_native.so.gz",
+      "archiveSha256": "344b778d577c2108f86961dda2b05e1344f043f2c413cb999708a58236ea7485",
+      "librarySha256": "a26b658038b5a7ece54edfad89f4ebf7e99ecafb1de0fda92cc592c4a27a0c14",
+      "fileName": "libjxl_native.so"
+    },
+    "macos-arm64": {
+      "url": "https://github.com/Alchemist-Aloha/jxl_native/releases/download/native-v0.1.0/macos-arm64-libjxl_native.dylib.gz",
+      "archiveSha256": "be548dc35d1c5a4932efb0b8514179dc2d328299370a0fbba3c53becfbb516ad",
+      "librarySha256": "7924a246acd2b87ad862d7b6b8162da1b75cf5d17abff3d2e6243f7fcfaad22b",
+      "fileName": "libjxl_native.dylib"
+    },
+    "macos-x64": {
+      "url": "https://github.com/Alchemist-Aloha/jxl_native/releases/download/native-v0.1.0/macos-x64-libjxl_native.dylib.gz",
+      "archiveSha256": "45a84ec5ceee2965189f84c15776c486c35d617d9033930285411f3c4d19ab66",
+      "librarySha256": "a33a3c5b57c99f095fa7a8987de14b6cfbd2486511f86850348bf6691ed898c1",
+      "fileName": "libjxl_native.dylib"
+    },
+    "windows-arm64": {
+      "url": "https://github.com/Alchemist-Aloha/jxl_native/releases/download/native-v0.1.0/windows-arm64-jxl_native.dll.gz",
+      "archiveSha256": "ea3f9130bdc3a5e2def3e05c9cfb5bc0bf821ce5cbbfbd9a0bbf857266783a6d",
+      "librarySha256": "4cac7ec59424500d0d429b3222f6642f46b1e3002f0c3901aab2a683081c2ce7",
+      "fileName": "jxl_native.dll"
+    },
+    "windows-x64": {
+      "url": "https://github.com/Alchemist-Aloha/jxl_native/releases/download/native-v0.1.0/windows-x64-jxl_native.dll.gz",
+      "archiveSha256": "675857d0332dc9570310ac650e6d0b8410054376952fd32957b92d5fea2a4f10",
+      "librarySha256": "97fd295ab5466068b0d2cc66c41f9bcb0db585471801f5b01814d126df9ff562",
+      "fileName": "jxl_native.dll"
+    }
+  }
 }
